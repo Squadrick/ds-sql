@@ -5,14 +5,18 @@
 #ifndef DS_SQL_TYPE_H
 #define DS_SQL_TYPE_H
 
+#include <string>
+#include <stdexcept>
+#include <iostream>
+
 class Type {
 public:
     unsigned short int memReq;
     enum dataType {
-        INT, DOUBLE, CHA
+        INT, DOUBLE, CHAR
     };
-
-    Type(unsigned memReq, dataType type);
+    dataType type;
+    Type(unsigned short int memReq, dataType type);
     bool isValid(std::string rawData);
 
 };
