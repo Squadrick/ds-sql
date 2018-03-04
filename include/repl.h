@@ -12,7 +12,6 @@ class Repl {
 public:
 
     Repl();
-
     void readInput();
 
 private:
@@ -34,7 +33,11 @@ private:
 
     enum StatementType {
         STATEMENT_INSERT,
-        STATEMENT_SELECT
+        STATEMENT_SELECT,
+        STATEMENT_CREATE,
+        STATEMENT_UPDATE,
+        STATEMENT_DELETE,
+        STATEMENT_ALTER
     };
 
     enum ExecuteResult {

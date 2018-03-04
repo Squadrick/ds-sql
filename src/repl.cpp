@@ -3,6 +3,9 @@
 //
 
 #include "repl.h"
+#include "lexer.h"
+#include <algorithm>
+using namespace std;
 
 Repl::Repl() {
     buffer = "";
@@ -11,7 +14,10 @@ Repl::Repl() {
 
 void Repl::readInput() {
     print_prompt();
-    std::cin >> buffer;
+    cin >> buffer;
+    transform(buffer.begin(),buffer.end(),buffer.begin(),::tolower);
+    Lexer lex(buffer);
+    lex.parse();
     input_length = buffer.length();
 
     if (buffer[0] == '.') {
@@ -42,7 +48,7 @@ void Repl::readInput() {
 }
 
 void Repl::print_prompt() {
-    std::printf("db > ");
+    printf("db > ");
 }
 
 Repl::MetaCommandResult Repl::meta_command() {
@@ -79,7 +85,7 @@ void Repl::execute_statement(StatementType type) {
 }
 
 int main() {
-    Repl ;
+    Repl in;
     
     while (true) {
         in.readInput();
