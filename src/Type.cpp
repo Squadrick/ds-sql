@@ -35,9 +35,3 @@ bool Type::isValid(std::string rawData) {
     return true;
 
 }
-
-int main() {
-    Type::dataType ty = Type::dataType::INT;
-    Type t(15, ty);
-    t.isValid("13.4");
-}
