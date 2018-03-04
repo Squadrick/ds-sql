@@ -33,5 +33,4 @@ bool Type::isValid(std::string rawData) {
             break;
     }
     return true;
-
 }

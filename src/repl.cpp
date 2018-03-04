@@ -79,8 +79,8 @@ void Repl::execute_statement(StatementType type) {
 }
 
 int main() {
-    Repl ;
-    
+    Repl in;
+
     while (true) {
         in.readInput();
     }

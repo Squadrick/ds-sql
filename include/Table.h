@@ -22,12 +22,14 @@ public:
 
     Table(string tableName);
 
-    ~Table();
+    bool serialize();
 
     void addAttribute(Attribute att);
 
+
     std::string name;
     std::vector<Attribute> attributes;
+
 };
 
 

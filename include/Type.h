@@ -16,7 +16,9 @@ public:
         INT, DOUBLE, CHAR
     };
     dataType type;
+
     Type(unsigned short int memReq, dataType type);
+
     bool isValid(std::string rawData);
 
 };
