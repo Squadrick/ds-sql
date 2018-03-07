@@ -7,25 +7,19 @@
 
 #include <string>
 #include <vector>
-#include "Type.h"
-#include "Constraint.h"
+#include "Attribute.h"
 
 
 class Table {
 public:
-
-    struct Attribute {
-        std::string attName;
-        Type attType;
-        Constraint attConstraint;
-    };
-
-    Table(string tableName);
+    explicit Table(std::string tableName);
 
     bool serialize();
 
-    void addAttribute(Attribute att);
+    int getNumberOfAttributes();
 
+    size_t getMemorySize();
+    void addAttribute(Attribute att);
 
     std::string name;
     std::vector<Attribute> attributes;
@@ -34,4 +28,3 @@ public:
 
 
 #endif //DS_SQL_TABLE_H
-

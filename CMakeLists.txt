@@ -5,8 +5,19 @@ include_directories(include)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCES src/repl.cpp src/Type.cpp)
-set(INCLUDES include/repl.h include/Type.h)
+set(SOURCES
+        src/repl.cpp
+        src/Type.cpp
+        src/Table.cpp
+        src/Attribute.cpp
+        src/Constraint.cpp)
+
+set(INCLUDES
+        include/repl.h
+        include/Type.h
+        include/Table.h
+        include/Attribute.h
+        include/Constraint.h)
 
 add_executable(ds-sql ${SOURCES} ${INCLUDES})
 

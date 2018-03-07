@@ -10,6 +10,7 @@
 #include <iostream>
 
 class Type {
+
 public:
     unsigned short int memReq;
     enum dataType {
@@ -17,10 +18,14 @@ public:
     };
     dataType type;
 
+
     Type(unsigned short int memReq, dataType type);
+
+    Type();
 
     bool isValid(std::string rawData);
 
+    bool serialize();
 };
 
 #endif //DS_SQL_TYPE_H

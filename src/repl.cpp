@@ -3,6 +3,8 @@
 //
 
 #include "repl.h"
+#include "Table.h"
+
 
 Repl::Repl() {
     buffer = "";
@@ -81,7 +83,17 @@ void Repl::execute_statement(StatementType type) {
 int main() {
     Repl in;
 
-    while (true) {
-        in.readInput();
-    }
+    Table t("test");
+    Type type(15, Type::dataType::INT);
+    Constraint c;
+    c.addConstraint("TEST_CONSTAINT");
+
+
+    Attribute attribute("test_att", type, c);
+    Attribute attribute2("test_att2", type, c);
+    t.addAttribute(attribute);
+    t.addAttribute(attribute2);
+    std::cout << attribute.isValid("12345") << std::endl;
+    std::cout << t.getMemorySize() << std::endl;
+    std::cout << t.attributes.size();
 }

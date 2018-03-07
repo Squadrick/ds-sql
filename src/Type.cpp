@@ -34,3 +34,12 @@ bool Type::isValid(std::string rawData) {
     }
     return true;
 }
+
+bool Type::serialize() {
+    return false;
+}
+
+Type::Type() {
+    Type::memReq = 0;
+    Type::type = Type::dataType::CHAR;
+}
