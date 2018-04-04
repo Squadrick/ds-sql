@@ -4,22 +4,39 @@
 
 #include "Attribute.h"
 
-Attribute::Attribute(std::string attName, Type attType, Constraint attConstraint) {
-    Attribute::attName = std::move(attName);
-    Attribute::attType = attType;
+template<typename T>
+Attribute<T>::Attribute(std::string attName, Constraint<T> attConstraint) {
     Attribute::attConstraint = std::move(attConstraint);
+    Attribute::attName = std::move(attName);
+    Attribute::mem = sizeof(T);
 }
 
-Attribute::Attribute() {
-    Attribute::attName = "";
-    Attribute::attType = Type();
-    Attribute::attConstraint;
+template<typename T>
+Attribute<T>::Attribute(std::string name) {
+    Attribute::attName = std::move(name);
+    Attribute::mem = sizeof(T);
 }
 
-bool Attribute::serialize() {
+template<typename T>
+Attribute<T>::Attribute() {
+    Attribute::mem = sizeof(T);
+}
+
+template<typename T>
+bool Attribute<T>::serialize() {
     return true;
 }
 
-bool Attribute::isValid(const std::string &rawData) {
-    return attType.isValid(rawData) && attConstraint.isValid(rawData);
+template<typename T>
+void Attribute<T>::setDefaultValue(T defaultVal) {
+    Attribute::defVal = defaultVal;
 }
+
+template<typename T>
+bool Attribute<T>::isValid(T value) {
+    return attConstraint.isValid(value);
+}
+
+
+
+

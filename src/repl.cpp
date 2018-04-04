@@ -31,7 +31,7 @@ void Repl::readInput() {
     switch (prepare_statement(&type)) {
         case (PREPARE_SUCCESS):
             break;
-        case(PREPARE_SYNTAX_ERROR):
+        case (PREPARE_SYNTAX_ERROR):
             printf("Syntax error\n");
         case (PREPARE_UNRECOGNIZED_COMMAND):
             printf("Unrecognized\n");
@@ -84,16 +84,25 @@ int main() {
     Repl in;
 
     Table t("test");
-    Type type(15, Type::dataType::INT);
-    Constraint c;
-    c.addConstraint("TEST_CONSTAINT");
+    Constraint<int> c;
+    Constraint<double> c1;
+    Constraint<std::string> c2;
 
+    Attribute<int> a("test", c);
+    Attribute<double> b("test_att2", c1);
+    Attribute<std::string> d("test_att3", c2);
 
-    Attribute attribute("test_att", type, c);
-    Attribute attribute2("test_att2", type, c);
-    t.addAttribute(attribute);
-    t.addAttribute(attribute2);
-    std::cout << attribute.isValid("12345") << std::endl;
-    std::cout << t.getMemorySize() << std::endl;
-    std::cout << t.attributes.size();
+    std::cout << a.getMemory() << std::endl;
+    std::cout << b.getMemory() << std::endl;
+    std::cout << d.getMemory() << std::endl;
+
+    t.addAttribute(a);
+    t.addAttribute(b);
+    t.addAttribute(d);
+
+    std::cout << a.isValid(3) << std::endl;
+
+    for(int i = 0; i < t.getNumberOfAttributes(); i++) {
+        std::cout << t.startIdx[i] << " " <<t.endIdx[i] << std::endl;
+    }
 }
