@@ -42,7 +42,6 @@ private:
         EXECUTE_TABLE_FULL
     };
 
-
     MetaCommandResult meta_command();
 
     PrepareResult prepare_statement(StatementType *type);

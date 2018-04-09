@@ -5,6 +5,8 @@
 #ifndef DS_SQL_CONSTRAINT_H
 #define DS_SQL_CONSTRAINT_H
 
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <functional>
 #include <iostream>
@@ -18,14 +20,25 @@ public:
         std::function<bool(T)> func;
         std::string errorMessage;
     };
+<<<<<<< HEAD
     std::vector<Checker> checkers;
+=======
+    std::vector<checker> checkers;
+    std::vector<std::string> rawConsCode;
+>>>>>>> 292a26a... Replace Type with templates
 
     bool isValid(T rawData);
 
     void addConstraint(Constraint<T>::Checker);
 
-    bool serialize();
+    void serialize(std::ofstream *file);
 
+<<<<<<< HEAD
+=======
+    void deserialize(std::ifstream *file);
+
+    int operator==(Constraint other);
+>>>>>>> 292a26a... Replace Type with templates
 };
 
 template<typename T>

@@ -79,6 +79,7 @@ void Repl::execute_statement(StatementType type) {
             break;
     }
 }
+<<<<<<< HEAD
 
 int main() {
     Repl in;
@@ -106,3 +107,5 @@ int main() {
         std::cout << t.startIdx[i] << " " <<t.endIdx[i] << std::endl;
     }
 }
+=======
+>>>>>>> 292a26a... Replace Type with templates

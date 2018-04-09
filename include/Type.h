@@ -8,24 +8,41 @@
 #include <string>
 #include <stdexcept>
 #include <iostream>
+#include <fstream>
 
 class Type {
 
 public:
-    unsigned short int memReq;
     enum dataType {
         INT, DOUBLE, CHAR
     };
     dataType type;
 
-
     Type(unsigned short int memReq, dataType type);
+
+    explicit Type(dataType type);
 
     Type();
 
+    unsigned short getSize(dataType type);
+
+    std::string getName();
+
+    dataType getType(std::string name);
+
     bool isValid(std::string rawData);
 
-    bool serialize();
+    void desc();
+
+    void serialize(std::ofstream *file);
+
+    void deserialize(std::ifstream *file);
+
+    int operator==(Type other);
+
+    unsigned short int memReq;
+    std::string typeNames[3] = {"INT", "DOUBLE", "CHAR"};
+
 };
 
 #endif //DS_SQL_TYPE_H

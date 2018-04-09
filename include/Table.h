@@ -5,8 +5,12 @@
 #ifndef DS_SQL_TABLE_H
 #define DS_SQL_TABLE_H
 
+#include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
+#include <map>
+#include <unordered_map>
 #include "Attribute.h"
 #include <iostream>
 
@@ -14,10 +18,11 @@
 class Table {
 public:
 
-    bool serialize();
+    bool serialize(std::ofstream *file);
 
-    int getNumberOfAttributes();
+    void deserialize(std::ifstream *file);
 
+<<<<<<< HEAD
     size_t totalMemorySize;
     std::string name;
     std::vector<void *> attributes;
@@ -30,6 +35,28 @@ public:
 
     template<typename T>
     void addAttribute(Attribute<T> att);
+=======
+    size_t getMemorySize();
+
+    void setPrimaryAttribute(Attribute *att);
+
+    void addAttribute(Attribute *att);
+
+    void desc();
+
+    void createTable();
+
+    int operator==(Table other);
+
+    unsigned short totalMemory = 0;
+    int primaryKeyIdx = -1;
+    int numberOfAttributes = 0;
+    std::string name;
+    std::vector<Attribute *> attributes;
+    std::vector<unsigned int> startIdx, endIdx;
+    std::vector<unsigned int> freeList;
+    std::unordered_map<std::string, int> attNameToIdx;
+>>>>>>> 292a26a... Replace Type with templates
 };
 
 /*
