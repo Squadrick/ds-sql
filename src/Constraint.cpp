@@ -8,7 +8,7 @@
 void Constraint::addConstraint(std::string rawData) {
     // parse rawData using lexer
     auto f = [](std::string data) -> bool {
-        return data.size() > 5;
+        return true;
     };
     rawConsCode.push_back(rawData);
     checkers.emplace_back((checker) {f, "error, length of data should be more than 5"});
@@ -17,7 +17,6 @@ void Constraint::addConstraint(std::string rawData) {
 bool Constraint::isValid(std::string rawData) {
     for (auto &checker : checkers)
         if (!checker.func(rawData)) {
-
             std::cerr << checker.errorMessage << std::endl;
             return false;
         }
@@ -44,7 +43,7 @@ void Constraint::deserialize(std::ifstream *file) {
         rawConsCode.push_back(temp);
         //auto f = lex(temp);
         auto f = [](std::string data) -> bool {
-            return data.size() > 5;
+            return true;
         };
         std::getline(*file, temp);
         checkers.push_back((checker) {f, temp});

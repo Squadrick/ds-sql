@@ -7,20 +7,29 @@
 
 #include "Table.h"
 #include <fstream>
+#include <cstdlib>
+#include <iostream>
 
 class Cursor {
-
     Table *table;
 
-    std::ifstream f;
-
-    Cursor(Table *t);
-
-    unsigned int getFreLocation() {
-        return table->freeList.erase(table->freeList.begin());
-    }
+    std::fstream f;
+public:
 
 
+    explicit Cursor(Table *t);
+
+    ~Cursor();
+
+    unsigned int moveToFreeLocation();
+
+    void insertValues(void *);
+
+    void deleteValues(int pos);
+
+    void *getValues(int pos);
+
+    void *index;
 };
 
 #endif //DS_SQL_CURSOR_H

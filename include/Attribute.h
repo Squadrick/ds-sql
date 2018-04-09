@@ -28,9 +28,13 @@ public:
 
     int operator==(Attribute other);
 
+    bool isInt();
+    bool isDouble();
+    bool isChar();
+
     std::string attName;
     Type *attType;
-    Constraint *attConstraint;
+ //   Constraint *attConstraint;
 };
 
 #endif //DS_SQL_ATTRIBUTE_H

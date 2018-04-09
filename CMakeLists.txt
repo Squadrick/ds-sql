@@ -13,7 +13,8 @@ set(SOURCES
         src/Constraint.cpp
         src/test.cpp
         src/Lexer.cpp
-        src/main.cpp)
+        src/main.cpp
+        src/Cursor.cpp)
 
 set(INCLUDES
         include/repl.h
@@ -21,7 +22,9 @@ set(INCLUDES
         include/Table.h
         include/Attribute.h
         include/Constraint.h
-        include/Lexer.h)
+        include/Lexer.h
+        include/Cursor.h
+        include/Operations.h)
 
 add_executable(ds-sql ${SOURCES} ${INCLUDES})
 
