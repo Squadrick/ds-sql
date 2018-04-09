@@ -22,9 +22,7 @@ void *Cursor::getValues(int pos) {
     void *values = malloc(table->totalMemory);
     int start = pos * table->totalMemory;
     f.seekg(start, f.beg);
-    std::cout << "FILE POS1 " << f.tellg() << std::endl;
     f.read((char *) values, table->totalMemory);
-    std::cout << "FILE POS2 " << f.tellg() << std::endl;
     return values;
 }
 

@@ -27,6 +27,33 @@ namespace Insert {
 
         auto *buffer = (char *) malloc(table->totalMemory);
 
+        for (int i = 0; i < table->noOfRows; i++) {
+            void *buffer = c.getValues(i);
+            auto *at = table->attributes[table->primaryKeyIdx];
+            auto *tempBuffer = (unsigned char *) malloc(at->attType->memReq);
+            std::memcpy(tempBuffer, buffer + table->startIdx[table->primaryKeyIdx], at->attType->memReq);
+            if (at->isInt()) {
+                int val;
+                memcpy(&val, tempBuffer, at->attType->memReq);
+                if (std::stoi(rawVals[table->primaryKeyIdx]) == val) {
+                    std::cerr << "PRIMARY KEY CONSTRAINT FAILED: " << val << std::endl;
+                    return;
+                }
+            } else if (at->isDouble()) {
+                double val;
+                memcpy(&val, tempBuffer, at->attType->memReq);
+                if (std::stod(rawVals[table->primaryKeyIdx]) == val) {
+                    std::cerr << "PRIMARY KEY CONSTRAINT FAILED: " << val << std::endl;
+                    return;
+                }
+            } else if (at->isChar()) {
+                if (rawVals[table->primaryKeyIdx] == std::string((char *) tempBuffer)) {
+                    std::cerr << "PRIMARY KEY CONSTRAINT FAILED: " << tempBuffer << std::endl;
+                    return;
+                }
+            }
+        }
+
         for (int i = 0; i < table->numberOfAttributes; i++) {
             Attribute *at = table->attributes[i];
             if (at->isInt()) {
@@ -55,7 +82,6 @@ namespace Select {
         Cursor c(table);
 
         for (int i = 0; i < table->noOfRows; i++) {
-            std::cout << "ROW: " << i << std::endl;
             void *buffer = c.getValues(i);
 
             for (int j = 0; j < table->numberOfAttributes; j++) {
@@ -65,23 +91,19 @@ namespace Select {
                 if (at->isInt()) {
                     int val;
                     std::memcpy(&val, tempBuffer, sizeof(int));
-                    std::cout << val << std::endl;
+                    std::cout << val << "\t";
                 } else if (at->isDouble()) {
                     double val;
                     std::memcpy(&val, tempBuffer, sizeof(double));
-                    std::cout << val << std::endl;
+                    std::cout << val << "\t";
                 } else if (at->isChar()) {
-                    std::cout << tempBuffer << std::endl;
+                    std::cout << tempBuffer << "\t";
                 }
                 free(tempBuffer);
             }
+            std::cout << std::endl;
             free(buffer);
         }
     }
 }
-//
-//namespace Delete
-//{
-//    void values()
-//}
 #endif //DS_SQL_INSERT_H

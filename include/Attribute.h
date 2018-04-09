@@ -34,7 +34,7 @@ public:
 
     std::string attName;
     Type *attType;
-    Constraint *attConstraint;
+ //   Constraint *attConstraint;
 };
 
 #endif //DS_SQL_ATTRIBUTE_H
