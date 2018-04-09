@@ -18,12 +18,15 @@ public:
 
 
     explicit Cursor(Table *t);
+
     ~Cursor();
+
     unsigned int moveToFreeLocation();
 
     void insertValues(void *);
 
     void deleteValues(int pos);
+
     void *getValues(int pos);
 
     void *index;

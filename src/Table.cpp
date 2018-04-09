@@ -31,10 +31,11 @@ void Table::addAttribute(Attribute *att) {
 bool Table::serialize(std::ofstream *file) {
     (*file) << name << std::endl;
     (*file) << std::to_string(primaryKeyIdx) << std::endl;
+    (*file) << std::to_string(noOfRows) << std::endl;
     (*file) << std::to_string(freeList.size()) << std::endl;
 
-    for (int i = 0; i < freeList.size(); i++) {
-        (*file) << std::to_string(freeList[i]) << std::endl;
+    for (unsigned int i : freeList) {
+        (*file) << std::to_string(i) << std::endl;
     }
 
     (*file) << std::to_string(numberOfAttributes) << std::endl;
@@ -51,8 +52,13 @@ void Table::deserialize(std::ifstream *file) {
 
     getline(*file, name);
 
+    fileName = dir + name + ".ds";
+
     getline(*file, temp);
     primaryKeyIdx = std::stoi(temp);
+
+    getline(*file, temp);
+    noOfRows = std::stoi(temp);
 
     getline(*file, temp);
     int iters = std::stoi(temp);
@@ -124,12 +130,16 @@ int Table::operator==(Table other) {
     int val = totalMemory == other.totalMemory &&
               primaryKeyIdx == other.primaryKeyIdx &&
               numberOfAttributes == other.numberOfAttributes &&
-              name == other.name;
+              name == other.name && noOfRows == other.noOfRows &&
+              freeList.size() == other.freeList.size();
 
     for (int i = 0; i < numberOfAttributes; i++) {
         val = val && ((*attributes[i]) == (*(other.attributes[i])));
     }
 
+    for (int i = 0; i < freeList.size(); i++) {
+        val = val && (freeList[i] == other.freeList[i]);
+    }
 
     return val;
 }

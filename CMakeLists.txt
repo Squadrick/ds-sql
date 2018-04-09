@@ -21,7 +21,7 @@ set(INCLUDES
         include/Attribute.h
         include/Constraint.h
         include/Cursor.h
-        include/Insert.h)
+        include/Operations.h)
 
 add_executable(ds-sql ${SOURCES} ${INCLUDES})
 

@@ -40,6 +40,7 @@ public:
     unsigned short totalMemory = 0;
     int primaryKeyIdx = -1;
     int numberOfAttributes = 0;
+    int noOfRows = 0;
     std::string name;
     std::string fileName;
     std::vector<Attribute *> attributes;
