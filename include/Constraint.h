@@ -5,6 +5,8 @@
 #ifndef DS_SQL_CONSTRAINT_H
 #define DS_SQL_CONSTRAINT_H
 
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <functional>
 
@@ -16,14 +18,17 @@ public:
         std::string errorMessage;
     };
     std::vector<checker> checkers;
+    std::vector<std::string> rawConsCode;
 
     bool isValid(std::string rawData);
 
     void addConstraint(std::string rawData);
 
-    bool serialize();
+    void serialize(std::ofstream *file);
 
-    checker buildFunction(std::string rawData);
+    void deserialize(std::ifstream *file);
+
+    int operator==(Constraint other);
 };
 
 #endif //DS_SQL_CONSTRAINT_H

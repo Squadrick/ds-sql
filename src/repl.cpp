@@ -79,21 +79,3 @@ void Repl::execute_statement(StatementType type) {
             break;
     }
 }
-
-int main() {
-    Repl in;
-
-    Table t("test");
-    Type type(15, Type::dataType::INT);
-    Constraint c;
-    c.addConstraint("TEST_CONSTAINT");
-
-
-    Attribute attribute("test_att", type, c);
-    Attribute attribute2("test_att2", type, c);
-    t.addAttribute(attribute);
-    t.addAttribute(attribute2);
-    std::cout << attribute.isValid("12345") << std::endl;
-    std::cout << t.getMemorySize() << std::endl;
-    std::cout << t.attributes.size();
-}

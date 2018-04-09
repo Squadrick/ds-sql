@@ -5,24 +5,32 @@
 #ifndef DS_SQL_ATTRIBUTE_H
 #define DS_SQL_ATTRIBUTE_H
 
+#include <string>
+#include <iostream>
+#include <fstream>
 #include "Type.h"
 #include "Constraint.h"
-#include <string>
+
 
 class Attribute {
 public:
-    std::string attName;
-    Type attType;
-    Constraint attConstraint;
-
-
     Attribute();
 
-    Attribute(std::string name, Type attType, Constraint attConstraint);
-
-    bool serialize();
+    Attribute(std::string name, Type *attType, Constraint *attConstraint);
 
     bool isValid(const std::string &rawData);
+
+    void serialize(std::ofstream *file);
+
+    void deserialize(std::ifstream *file);
+
+    void desc();
+
+    int operator==(Attribute other);
+
+    std::string attName;
+    Type *attType;
+    Constraint *attConstraint;
 };
 
 #endif //DS_SQL_ATTRIBUTE_H

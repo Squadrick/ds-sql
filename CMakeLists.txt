@@ -10,7 +10,8 @@ set(SOURCES
         src/Type.cpp
         src/Table.cpp
         src/Attribute.cpp
-        src/Constraint.cpp)
+        src/Constraint.cpp
+        src/test.cpp)
 
 set(INCLUDES
         include/repl.h

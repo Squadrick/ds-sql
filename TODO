@@ -1,0 +1,5 @@
+1. Convert all vectors to maps where possible - DONE
+2. Recursively serialize(str) into the same file - DONE
+3. replace getName in Type with an array lookup - DONE
+4. Prelim file writing and reading
+5. Enforce primary key constraints using like a goddamn hash
