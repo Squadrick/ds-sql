@@ -1,9 +1,6 @@
-//
-// Created by squadrick on 3/3/18.
-//
-
 #include "repl.h"
 #include "Table.h"
+#include "Lexer.h"
 
 
 Repl::Repl() {
@@ -11,35 +8,49 @@ Repl::Repl() {
     input_length = 0;
 }
 
+std::string Convert(std::string& str)
+{
+	std::locale settings;
+	std::string converted;
+
+	for(short i = 0; i < str.size(); ++i)
+		converted += (std::toupper(str[i], settings));
+	
+	return converted;
+}
+
 void Repl::readInput() {
     print_prompt();
-    std::cin >> buffer;
+    std::getline(std::cin, buffer);
     input_length = buffer.length();
+    buffer = Convert(buffer);
+    Lexer lex(buffer);
+    lex.evaluate();
 
-    if (buffer[0] == '.') {
-        switch (meta_command()) {
-            case (META_COMMAND_SUCCESS):
-                return;
-            case (META_COMMAND_UNRECOGNIZED_COMMAND) :
-                printf("Unrecognized\n");
-                return;
-        }
-    }
+    // if (buffer[0] == '.') {
+    //     switch (meta_command()) {
+    //         case (META_COMMAND_SUCCESS):
+    //             return;
+    //         case (META_COMMAND_UNRECOGNIZED_COMMAND) :
+    //             printf("Unrecognized\n");
+    //             return;
+    //     }
+    // }
 
-    StatementType type;
+    // StatementType type;
 
-    switch (prepare_statement(&type)) {
-        case (PREPARE_SUCCESS):
-            break;
-        case(PREPARE_SYNTAX_ERROR):
-            printf("Syntax error\n");
-        case (PREPARE_UNRECOGNIZED_COMMAND):
-            printf("Unrecognized\n");
-            return;
-    }
+    // switch (prepare_statement(&type)) {
+    //     case (PREPARE_SUCCESS):
+    //         break;
+    //     case(PREPARE_SYNTAX_ERROR):
+    //         printf("Syntax error\n");
+    //     case (PREPARE_UNRECOGNIZED_COMMAND):
+    //         printf("Unrecognized\n");
+    //         return;
+    // }
 
-    execute_statement(type);
-    printf("Executed");
+    // execute_statement(type);
+    // printf("Executed");
 
 }
 

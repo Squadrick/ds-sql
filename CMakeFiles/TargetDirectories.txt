@@ -1,0 +1,3 @@
+/home/shreyansh/Documents/dbsproject/ds-sql/CMakeFiles/edit_cache.dir
+/home/shreyansh/Documents/dbsproject/ds-sql/CMakeFiles/rebuild_cache.dir
+/home/shreyansh/Documents/dbsproject/ds-sql/CMakeFiles/ds-sql.dir
