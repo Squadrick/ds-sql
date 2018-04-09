@@ -5,8 +5,13 @@
 #include "Table.h"
 
 Table::Table(std::string tableName) {
-    Table::name = std::move(tableName);
+    name = std::move(tableName);
+    fileName = dir + name + ".ds";
+    std::ofstream file(fileName.c_str());
+    file.close();
 }
+
+Table::Table() = default;
 
 void Table::addAttribute(Attribute *att) {
     if (attNameToIdx.count(att->attName) == 1) {

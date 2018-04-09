@@ -28,6 +28,10 @@ public:
 
     int operator==(Attribute other);
 
+    bool isInt();
+    bool isDouble();
+    bool isChar();
+
     std::string attName;
     Type *attType;
     Constraint *attConstraint;

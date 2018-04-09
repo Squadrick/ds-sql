@@ -8,6 +8,7 @@
 #include "Table.h"
 #include "Cursor.h"
 #include <fstream>
+#include <cstring>
 
 void values(Table *table, std::vector<std::string> rawVals) {
     // use a cursor to file included in Table -- Cursor c(table);
@@ -27,6 +28,27 @@ void values(Table *table, std::vector<std::string> rawVals) {
 
     Cursor c(table);
 
+    auto *buffer = (char*) malloc(table->totalMemory);
+
+    for(int i = 0; i < table->numberOfAttributes; i++) {
+        Attribute *at = table->attributes[i];
+        if(at->isInt()) {
+            int val = std::stoi(rawVals[i]);
+            std::memcpy(buffer + table->startIdx[i], &val, at->attType->memReq);
+        }
+        else if(at->isDouble()) {
+            double val = std::stod(rawVals[i]);
+            std::memcpy(buffer + table->startIdx[i], &val, at->attType->memReq);
+        }
+        else{
+            auto *arr = (char*)rawVals[i].c_str();
+            char val = *arr;
+            std::memcpy(buffer+table->startIdx[i], &val, at->attType->memReq);
+        }
+
+    }
+    c.insertValues(buffer);
+    free(buffer);
 
 }
 

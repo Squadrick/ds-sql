@@ -13,10 +13,13 @@
 #include <unordered_map>
 #include "Attribute.h"
 
+#define dir "/home/squadrick/ds-sql/"
 
 class Table {
 public:
     explicit Table(std::string tableName);
+
+    Table();
 
     bool serialize(std::ofstream *file);
 
@@ -38,6 +41,7 @@ public:
     int primaryKeyIdx = -1;
     int numberOfAttributes = 0;
     std::string name;
+    std::string fileName;
     std::vector<Attribute *> attributes;
     std::vector<unsigned int> startIdx, endIdx;
     std::vector<unsigned int> freeList;

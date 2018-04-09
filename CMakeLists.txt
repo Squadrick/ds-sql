@@ -11,14 +11,17 @@ set(SOURCES
         src/Table.cpp
         src/Attribute.cpp
         src/Constraint.cpp
-        src/test.cpp)
+        src/test.cpp
+        src/Cursor.cpp)
 
 set(INCLUDES
         include/repl.h
         include/Type.h
         include/Table.h
         include/Attribute.h
-        include/Constraint.h)
+        include/Constraint.h
+        include/Cursor.h
+        include/Insert.h)
 
 add_executable(ds-sql ${SOURCES} ${INCLUDES})
 

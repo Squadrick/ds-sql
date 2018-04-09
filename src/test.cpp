@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include "Table.h"
+#include "Insert.h"
 
 
 int main() {
@@ -17,26 +18,25 @@ int main() {
     c.addConstraint("TEST_CONSTRAINT");
 
     Attribute attribute("test_att", &Int, &c);
-    Attribute attribute2("test_att2", &Int, &c);
+    Attribute attribute2("test_att2", &Double, &c);
     Attribute attribute3("dheeraj", &String, &c);
-    Attribute attribute4("dheeraj", &Double, &c);
+
 
     t.addAttribute(&attribute);
     t.addAttribute(&attribute2);
     t.addAttribute(&attribute3);
-    t.addAttribute(&attribute4);
     t.setPrimaryAttribute(&attribute);
     t.createTable();
 
     std::ofstream o;
-    o.open("/home/squadrick/ds-sql/test.txt");
+    o.open("/home/squadrick/ds-sql/test.ds-meta");
     t.serialize(&o);
     o.close();
 
     std::ifstream i;
-    i.open("/home/squadrick/ds-sql/test.txt");
+    i.open("/home/squadrick/ds-sql/test.ds-meta");
 
-    Table t1("temp");
+    Table t1;
     t1.deserialize(&i);
     t1.createTable();
     i.close();
@@ -47,4 +47,9 @@ int main() {
     t1.setPrimaryAttribute(&attribute5);
     assert(!(t == t1));
 
+    std::vector<std::string> inVals;
+    inVals.emplace_back("1");
+    inVals.emplace_back("1.25");
+    inVals.emplace_back("testing");
+    values(&t, inVals);
 }

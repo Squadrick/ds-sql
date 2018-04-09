@@ -56,3 +56,16 @@ int Attribute::operator==(Attribute other) {
            *attType == *(other.attType) &&
            *attConstraint == *(other.attConstraint);
 }
+
+bool Attribute::isInt() {
+    return attType->type == Type::dataType::INT;
+}
+
+bool Attribute::isDouble() {
+    return attType->type == Type::dataType::DOUBLE;
+}
+
+bool Attribute::isChar() {
+    return attType->type == Type::dataType::CHAR;
+}
+

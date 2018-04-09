@@ -8,7 +8,7 @@
 void Constraint::addConstraint(std::string rawData) {
     // parse rawData using lexer
     auto f = [](std::string data) -> bool {
-        return data.size() > 5;
+        return true;
     };
     rawConsCode.push_back(rawData);
     checkers.emplace_back((checker) {f, "error, length of data should be more than 5"});
